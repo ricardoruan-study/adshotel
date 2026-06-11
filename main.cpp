@@ -172,29 +172,13 @@ void listarReservasAtivas() {
     if (mysql_query(conn, qry)) { setStatus("Erro SQL"); return; }
     MYSQL_RES* res = mysql_store_result(conn);
 
-    // Adicionado as explicações teóricas exigidas no relatório de forma limpa para a banca ver
-    string tabela = "=======================================================================================\r\n"
-                    "                     REQUISITOS TEORICOS EXIGIDOS NO PROJETO                           \r\n"
-                    "=======================================================================================\r\n"
-                    "1. PONTEIROS (O que sao, por que e onde usamos):\r\n"
-                    "   - O que sao: Variaveis que guardam enderecos de memoria RAM em vez de valores brutos.\r\n"
-                    "   - Por que usamos: Para economizar memoria (nao clonar objetos pesados) e alterar dados\r\n"
-                    "     diretamente na origem.\r\n"
-                    "   - Onde usamos neste codigo: Na funcao 'conectarBanco(MYSQL** conn)', usando ponteiro duplo\r\n"
-                    "     para configurar a conexao diretamente na funcao principal (main) sem perder a referencia.\r\n\r\n"
-                    "2. RECURSIVIDADE (O que e, por que e onde usamos):\r\n"
-                    "   - O que e: Uma funcao que resolve parte de um problema e chama a si mesma para o resto.\r\n"
-                    "   - Por que usamos: Deixa o codigo muito mais limpo e elegante para resolver problemas que\r\n"
-                    "     podem ser quebrados em subproblemas identicos.\r\n"
-                    "   - Onde usamos neste codigo: Na funcao 'limparCamposRecursivo', que varre uma lista de inputs\r\n"
-                    "     visuais da tela e limpa um por um ate bater no Caso Base (fim do vetor).\r\n"
-                    "=======================================================================================\r\n\r\n"
-                    "--- RELATORIO FINANCEIRO DE RESERVAS ATIVAS ---\r\n\r\n";
+    string tabela = "=======================================================================================\r\n\r\n"
+                    "--- RELATORIO FINANCEIRO DE RESERVAS ATIVAS ---\r\n\r\n"+
 
-    tabela += padRight("ID", 6) + padRight("HOSPEDE", 20) + padRight("QUARTO", 18) +
-              padRight("INICIO", 12) + padRight("FIM", 12) +
-              padRight("DIAS", 6) + "TOTAL (R$)\r\n"
-              "---------------------------------------------------------------------------------------\r\n";
+                      padRight("ID", 6) + padRight("HOSPEDE", 20) + padRight("QUARTO", 18) +
+                      padRight("INICIO", 12) + padRight("FIM", 12) +
+                      padRight("DIAS", 6) + "TOTAL (R$)\r\n"
+                    "---------------------------------------------------------------------------------------\r\n";
 
     if (res) {
         MYSQL_ROW row;
